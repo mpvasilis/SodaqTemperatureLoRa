@@ -4,24 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/*
- * Copyright 2016 Fabio Tiriticco / Fabway
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Created by fabiotiriticco on 5 June 2016.
- *
- */
 public class Packet {
 
     /*
@@ -53,9 +35,45 @@ public class Packet {
         }
         ]
     }
+
+    {
+   "app_id":"uowm_iot_temperature",
+   "dev_id":"sodaq",
+   "hardware_serial":"0004A30B002014E2",
+   "port":1,
+   "counter":142,
+   "payload_raw":"MjcuMTA=",
+   "metadata":{
+      "time":"2019-04-08T10:31:04.221101377Z",
+      "frequency":868.3,
+      "modulation":"LORA",
+      "data_rate":"SF7BW125",
+      "airtime":51456000,
+      "coding_rate":"4/5",
+      "gateways":[
+         {
+            "gtw_id":"ttn-kozani-icte",
+            "gtw_trusted":true,
+            "timestamp":2184763243,
+            "time":"2019-04-08T10:31:04Z",
+            "channel":1,
+            "rssi":-77,
+            "snr":9.5,
+            "rf_chain":1,
+            "latitude":40.30632,
+            "longitude":21.807411,
+            "altitude":710,
+            "location_source":"registry"
+         }
+      ],
+      "latitude":40.305542,
+      "longitude":21.803896,
+      "location_source":"registry"
+   }
+}
     */
 
-    @SerializedName("payload")
+    @SerializedName("payload_raw")
     String mPayload;
 
     @SerializedName("port")
@@ -64,11 +82,11 @@ public class Packet {
     @SerializedName("counter")
     int mCounter;
 
-    @SerializedName("dev_eui")
+    @SerializedName("hardware_serial")
     String mDevEUI;
 
-    @SerializedName("metadata")
-    List<Metadata> mMetadata;
+    //@SerializedName("metadata")
+    //List<Metadata> mMetadata;
 
     @SerializedName("ttl")
     String mTTL;
@@ -90,7 +108,7 @@ public class Packet {
     }
 
     public List<Metadata> getMetadata() {
-        return mMetadata;
+        return null;
     }
 
     public String getTTL() {

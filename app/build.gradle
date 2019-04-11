@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "org.ttn.android.sample"
+        applicationId "pw.vasilis.android.SodaqTemperatureLora"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 4
@@ -27,19 +27,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
-
-    // in your project this should be
-    // compile 'io.ticofab:ttn-android-sdk:1.1.1'
     compile project(':ttn-android-sdk')
-
-    // butterknife for views injection
     compile 'com.jakewharton:butterknife:7.0.1'
-
-    // material progress bar
-    // https://github.com/lsjwzh/MaterialLoadingProgressBar
     compile('com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE')
-
-    // chart line
-    // https://github.com/robinhood/spark
     compile 'com.robinhood.spark:spark:1.1.0'
 }

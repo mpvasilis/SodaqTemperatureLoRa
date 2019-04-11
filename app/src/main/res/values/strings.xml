@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">TTN Android SDK Sample</string>
+    <string name="app_name">IoT Lab Temperature</string>
     <string name="action_settings">Settings</string>
     <string name="packet_received">Packet received!</string>
     <string name="mqtt_error">MQTT error: %1$s</string>
     <string name="packet_title">Packet:</string>
     <string name="sample_data_dialog_title">TTN Android SDK</string>
-    <string name="sample_data_dialog_message">You are now seeing sample data. Wait for new packets to come through.</string>
 </resources>

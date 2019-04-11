@@ -1,13 +1,15 @@
-package org.ttn.android.sample;
+package pw.vasilis.android.SodaqTemperatureLora;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.joda.time.DateTime;
+import org.ttn.android.sample.R;
 import org.ttn.android.sdk.v1.domain.Packet;
 
 import java.text.DateFormat;
@@ -16,24 +18,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/*
- * Copyright 2016 Fabio Tiriticco / Fabway
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Created by fabiotiriticco on 5 June 2016.
- *
- */
 
 public class PacketAdapter extends RecyclerView.Adapter<PacketAdapter.ViewHolder> {
 
@@ -56,6 +40,7 @@ public class PacketAdapter extends RecyclerView.Adapter<PacketAdapter.ViewHolder
 
         // node eui
         String nodeEui = packet.getDevEUI();
+        String temperature = String.valueOf(decodeTemperature(packet.getPayload()))+" °C" ;
         if (!TextUtils.isEmpty(nodeEui)) {
             vh.mDeviceId.setVisibility(View.VISIBLE);
             vh.mDeviceId.setText(nodeEui);
@@ -64,8 +49,7 @@ public class PacketAdapter extends RecyclerView.Adapter<PacketAdapter.ViewHolder
             vh.mDeviceId.setText(null);
         }
 
-        // timestamp
-        DateTime date = packet.getMetadata().get(0).getServerTime();
+        DateTime date = new DateTime();//packet.getMetadata().get(0).getServerTime()
         if (date != null) {
             vh.mTime.setVisibility(View.VISIBLE);
             vh.mTime.setText(mDateFormatter.format(date.toDate()));
@@ -73,6 +57,8 @@ public class PacketAdapter extends RecyclerView.Adapter<PacketAdapter.ViewHolder
             vh.mTime.setVisibility(View.GONE);
             vh.mTime.setText(null);
         }
+        vh.mTmperature.setVisibility(View.VISIBLE);
+        vh.mTmperature.setText(temperature);
     }
 
     @Override
@@ -83,10 +69,17 @@ public class PacketAdapter extends RecyclerView.Adapter<PacketAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.packet_time) TextView mTime;
         @Bind(R.id.packet_device_id) TextView mDeviceId;
+        @Bind(R.id.temperature) TextView mTmperature;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
+     double decodeTemperature(String encodedPayload) {
+        byte[] bytes = Base64.decode(encodedPayload, Base64.DEFAULT);
+         double temp = Double.parseDouble(new String(bytes));
+        return temp;
+    }
+
 }

@@ -1,5 +1,7 @@
 package org.ttn.android.sdk.v1.client;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -18,23 +20,7 @@ import org.ttn.android.sdk.v1.domain.Packet;
 
 import java.net.URISyntaxException;
 
-/*
- * Copyright 2016 Fabio Tiriticco / Fabway
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Created by fabiotiriticco on 3 June 2016.
- */
+
 public class TTNMqttClient {
     private static final int MQTT_HOST_PORT = 1883;
 
@@ -77,6 +63,7 @@ public class TTNMqttClient {
 
                 try {
                     String jsonStr = body.ascii().toString();
+                    Log.d("json",jsonStr);
                     Packet packet = mGson.fromJson(jsonStr, Packet.class);
                     listener.onPacket(packet);
                 } catch (JsonSyntaxException e) {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".TTNAndroidSDKSampleActivity">
+    tools:context="pw.vasilis.android.SodaqTemperatureLora.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:alpha="0.25"
-        android:src="@drawable/the_things_network_logo"/>
+        android:src="@drawable/thermometer" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,14 +33,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.65"
-            android:padding="8dp"/>
+            android:padding="8dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.05"
             android:gravity="center_horizontal"
-            android:text="Temperature variation in TTN office:"/>
+            android:text="Temperature variation:" />
 
         <com.robinhood.spark.SparkView
             android:id="@+id/temperature_view"
