@@ -12,8 +12,6 @@ const char *appKey = "5B89DA999AA350A808BFC5DFD8E5BBD6";
 const char *DevEUI2 = "0004A30B002014E2";
 bool OTAA = true;
 
-// OTAA
-// With using the GetHWEUI() function the HWEUI will be used
 static uint8_t DevEUI[8]
 {
  0x00, 0x04, 0xA3, 0x0B, 0x00, 0x20, 0x14, 0xE2 
@@ -32,22 +30,17 @@ void setup()
   delay(1000);
   
   while ((!debugSerial) && (millis() < 10000)){
-    // Wait 10 seconds for debugSerial to open
   }
 
   debugSerial.println("Start");
 
-  // Start streams
   debugSerial.begin(57600);
   loraSerial.begin(LoRaBee.getDefaultBaudRate());
 
-  LoRaBee.setDiag(debugSerial); // to use debug remove //DEBUG inside library
+  LoRaBee.setDiag(debugSerial); 
   LoRaBee.init(loraSerial, LORA_RESET);
 
-  //Use the Hardware EUI
   getHWEUI();
-
-  // Print the Hardware EUI
   debugSerial.print("LoRa HWEUI: ");
   for (uint8_t i = 0; i < sizeof(DevEUI); i++) {
     debugSerial.print((char)NIBBLE_TO_HEX_CHAR(HIGH_NIBBLE(DevEUI[i])));
@@ -62,10 +55,6 @@ void setup()
 void setupLoRa(){
 
     setupLoRaOTAA();
- 
-  // Uncomment this line to for the RN2903 with the Actility Network
-  // For OTAA update the DEFAULT_FSB in the library
-  // LoRaBee.setFsbChannels(1);
 
   LoRaBee.setSpreadingFactor(9);
 }
@@ -127,8 +116,7 @@ void loop()
     default:
       break;
     }
-    // Delay between readings
-    // 60 000 = 1 minute
+
     digitalWrite(LED_BUILTIN, LOW);
     delay(10000); 
 }
@@ -142,9 +130,6 @@ String getTemperature()
   return String(temp);
 }
 
-/**
-* Gets and stores the LoRa module's HWEUI/
-*/
 static void getHWEUI()
 {
   uint8_t len = LoRaBee.getHWEUI(DevEUI, sizeof(DevEUI));

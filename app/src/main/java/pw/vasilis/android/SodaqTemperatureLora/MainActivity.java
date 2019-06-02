@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // initial data refresh
         subscribe();
     }
 
@@ -79,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
 
-        // the MQTT client
         mTTNMqttClient.disconnect();
     }
 
